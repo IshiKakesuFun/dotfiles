@@ -1,15 +1,15 @@
 --------------------------------------------------------------------------------
 -- https://github.com/wbthomason/packer.nvim
 --------------------------------------------------------------------------------
-local status, u, packer
+local status, u, packer -- {{{
 -- import ustils safely
 status, u = pcall(require, "kakesu.utils")
 if not status then
   print("Utilities are not installed")
   return
-end
+end -- }}}
 
-local packerUrl = "https://github.com/wbthomason/packer.nvim"
+local packerUrl = "https://github.com/wbthomason/packer.nvim" -- {{{
 local install_path = u.concat_path(DATA_PATH, "site", "pack", "packer", "start", "packer.nvim")
 
 -- auto install packer if not installed
@@ -37,7 +37,7 @@ status, packer = pcall(require, "packer")
 if not status then
   print("Packer is not installed")
   return
-end
+end-- }}}
 
 -- add list of plugins to install
 return packer.startup(function(use)
@@ -50,13 +50,13 @@ return packer.startup(function(use)
     requires = { "nvim-lua/plenary.nvim" },
   })
 
-  -- color scheme
+  --{{{ color scheme
   use("ellisonleao/gruvbox.nvim")
   use("EdenEast/nightfox.nvim")
   use("arcticicestudio/nord-vim")
+  --}}} 
   
-  -- essential plugins
-  
+  --{{{ essential plugins
   -- add, delete, change surroundings (it's awesome)
   use("tpope/vim-surround")
   -- commenting with gc, gb
@@ -70,7 +70,8 @@ return packer.startup(function(use)
   --   "aymericbeaumet/vim-symlink",
   --   requires = { "moll/vim-bbye" },
   -- })
-    
+  --}}}
+
   -- git
   use("tpope/vim-fugitive")
   use("lewis6991/gitsigns.nvim")
@@ -140,10 +141,12 @@ return packer.startup(function(use)
   -- formatting & linting
   use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
   use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
-
+  ]]
   -- Tools
+  use("folke/zen-mode.nvim")
   use("norcalli/nvim-colorizer.lua")
   use("windwp/nvim-autopairs")
+  --[[
   use("windwp/nvim-ts-autotag")
   use({
     "iamcco/markdown-preview.nvim",

@@ -65,6 +65,8 @@ km("n", "^", "0", nOpts)
 -- old windows habbits
 km("n", "<C-a>", "ggVG", nOpts) -- select all
 km("n", "<C-s>", "<cmd>w<CR>", nOpts) -- save changes 
+km("v", "<C-s>", "<cmd>w<CR>", vOpts) -- save changes 
+km("i", "<C-s>", "<cmd>w<CR>", iOpts) -- save changes 
 
 -- capy all messages to clipboard
 km("n", "<leader>cm", "<cmd>let @*=execute('messages')<cr>", nOpts)
@@ -87,7 +89,6 @@ km("n", "<leader>2x", ':lua require("kakesu.utils").replace_char_to_hex()<CR>', 
 km("n", "<leader>2yc", ':lua require("kakesu.utils").yank_hex_to_char()<CR>', nOpts)
 km("n", "<leader>2yx", ':lua require("kakesu.utils").yank_char_to_hex()<CR>', nOpts)
 
--- km("n", "<Leader>e", ":NvimTreeToggle<CR>", nOpts) -- TODO move to after/plugin
 
 --------------------------------------------------------------------------------
 -- NORMAL NON-SILENT
