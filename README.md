@@ -2,6 +2,23 @@
 
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/IshiKakesuFun/dotfiles)
 
+- [Prerekvizity](#prerekvizity)
+  * [Scoop CLI installer](#scoop-cli-installer)
+  * [Instalace nástrojů pro vývoj](#instalace-nástrojů-pro-vývoj)
+  * [Git](#git)
+  * [NVM manažer verzí node.js a npm](#nvm-manažer-verzí-nodejs-a-npm)
+  * [Node.js a npm](#nodejs-a-npm)
+  * [Nerd fonty](#nerd-fonty)
+  * [CMake, gcc, VC redist, WGet, CURL, 7-Zip](#cmake-gcc-vc-redist-wget-curl-7-zip)
+  * [Docker](#docker)
+  * [Neofetch - systémové informace pro CLI](#neofetch---systémové-informace-pro-cli)
+- [Instalace neovim](#instalace-neovim)
+  * [Prerekvizity](#prerekvizity-1)
+    + [Symlinky do konfiguračních adresářů](#symlinky-do-konfiguračních-adresářů)
+    + [Provider nodejs pro neovim](#provider-nodejs-pro-neovim)
+    + [Python, Ruby, Perl](#python-ruby-perl)
+    + [Lua, LuaRocks](#lua-luarocks)
+
 # Prerekvizity
 
 ## Scoop CLI installer
