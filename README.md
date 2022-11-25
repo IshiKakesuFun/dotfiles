@@ -11,7 +11,6 @@
   * [Nerd fonty](#nerd-fonty)
   * [Make, CMake, gcc, VC redist, WGet, CURL, 7-Zip a cacert](#make-cmake-gcc-vc-redist-wget-curl-7-zip-a-cacert)
   * [Docker](#docker)
-  * [Neofetch - systémové informace pro CLI](#neofetch---systémové-informace-pro-cli)
 - [Instalace neovim](#instalace-neovim)
   * [Prerekvizity](#prerekvizity-1)
     + [Symlinky do konfiguračních adresářů](#symlinky-do-konfiguračních-adresářů)
@@ -178,38 +177,33 @@ Prověř instalaci výpisem.
 scoop list
 ```
 
-Zavři a znovu otevři konzoli
+Zavři a znovu otevři konzoli.
 
 ## Docker
 
-- [x] Nainstaluj Docker 
+- [x] Nainstaluj Docker.
+
+> Důležité: Takto nainstalovaný *docker* podporuje jen kontajnery pro OS hosta (Windows).
 
 ```powershell
 scoop install docker
 ```
 
-Zavři a znovu otevři konzoli
-
-- [x] Zaveď službu *Docker Engine*
+- [x] Zaveď službu *Docker Engine*.
 
 ```powershell
 dockerd --register-service
 ```
 
-- [x] Otevři *Services* a službu *Docker Engine* nastartuj
+- [x] Otevři *Services* a službu *Docker Engine* nastartuj.
 
-Zavři a znovu otevři konzoli a ověř funkčnost vypsáním systémových informací.
+Ověř funkčnost vypsáním systémových informací. Zavři a znovu otevři konzoli.
 
 ```powershell
 docker system info
 ```
 
-## Neofetch - systémové informace pro CLI
-
-```powershel
-scoop install neofetch
-neofetch
-```
+Zavři a znovu otevři konzoli.
 
 # Instalace [neovim](https://neovim.io/)
 
