@@ -2,21 +2,22 @@
 
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/IshiKakesuFun/dotfiles)
 
+- [Personal dotfiles for Windows 2](#personal-dotfiles-for-windows-2)
 - [Prerekvizity](#prerekvizity)
-  * [Scoop CLI installer](#scoop-cli-installer)
-  * [Instalace nástrojů pro vývoj](#instalace-nástrojů-pro-vývoj)
-  * [Git](#git)
-  * [NVM manažer verzí node.js a npm](#nvm-manažer-verzí-nodejs-a-npm)
-  * [Node.js a npm](#nodejs-a-npm)
-  * [Nerd fonty](#nerd-fonty)
-  * [Make, CMake, gcc, VC redist, WGet, CURL, 7-Zip a cacert](#make-cmake-gcc-vc-redist-wget-curl-7-zip-a-cacert)
-  * [Docker](#docker)
+  - [Scoop CLI installer](#scoop-cli-installer)
+  - [Instalace nástrojů pro vývoj](#instalace-nástrojů-pro-vývoj)
+  - [Git](#git)
+  - [NVM manažer verzí node.js a npm](#nvm-manažer-verzí-nodejs-a-npm)
+  - [Node.js a npm](#nodejs-a-npm)
+  - [Nerd fonty](#nerd-fonty)
+  - [Make, CMake, gcc, VC redist, WGet, CURL, 7-Zip a cacert](#make-cmake-gcc-vc-redist-wget-curl-7-zip-a-cacert)
+  - [Docker](#docker)
 - [Instalace neovim](#instalace-neovim)
-  * [Prerekvizity](#prerekvizity-1)
-    + [Symlinky do konfiguračních adresářů](#symlinky-do-konfiguračních-adresářů)
-    + [Provider nodejs pro neovim](#provider-nodejs-pro-neovim)
-    + [Python, Ruby, Perl](#python-ruby-perl)
-    + [Lua, LuaRocks](#lua-luarocks)
+  - [Prerekvizity](#prerekvizity-1)
+    - [Symlinky do konfiguračních adresářů](#symlinky-do-konfiguračních-adresářů)
+  - [Instalace](#instalace)
+  - [Po instalaci](#po-instalaci)
+    - [Poskytovatele pro Python, Ruby, NodeJS a Perl](#poskytovatele-pro-python-ruby-nodejs-a-perl)
 
 # Prerekvizity
 
@@ -231,36 +232,86 @@ if (Test-Path "$lnvim") {
 New-Item -ItemType SymbolicLink -Path "$lnvim" -Target "$nvim";
 ```
 
-### Provider nodejs pro neovim
+## Instalace
 
-- [x] Nainstaluje nodejs provider pro neovim jako globální balíček 
+- [x] Nainstaluj *nightly build*
+
+```powershell
+scoop install neovim-nightly
+```
+
+## Po instalaci
+
+V prostředí Windows pouštěj *neovim GUI* klienta `nvim-qt`. 
+Po instalaci použij parametr `--clean`, aby se nezavedla konfigurace z repozitáře,
+která obsahuje i nastavení vyžadující dosud nenainstalované části.
+
+```powershell
+nvim-qt -- --clean
+```
+
+V *neovimu* proveď příkaz, který analyzuje stav instalace aplikace, zejména
+postytovatelů podporovaných jazyků
+```
+:checkhealth
+```
+
+### Poskytovatele pro Python, Ruby, NodeJS a Perl
+
+Funkce *neovimu* lze rozšiřovat i pluginy resp. moduly od ruzných 
+poskytovatelů. Příslušný *balíček* podporující neovim doinstaluj odpovídajícím
+správcem balíčků daného jazyka.
+
+- [x] Nainstaluj *NodeJS* poskytovatele pro neovim jako globální balíček.
 
 ```powershell
 npm install -g neovim
 npm -g list
 ```
 
-### Python, Ruby, Perl
-
-- [ ] Funkce neovimu lze rozšiřovat i pluginy resp. moduly od ruzných 
-poskytovatelů. Příslušný *balíček* podporující neovim doinstaluj odpovídajícím
-správcem balíčků daného jazyka.
-
-### Lua, LuaRocks
-
-- [x] Neovim se konfiguruje primárně pomocí pluginů v jazyce Lua
+- [x] Než nainstaluješ *Python* poskytovatele pro neovim, musíš nainstalovat
+  jazyk Python, který automaticky nainstaluje *dark*, a posléze instalátor
+  balíčku *pip*.
 
 ```powershell
-scoop install lua
-lua -v
+scoop install python
+python --version
+```
+- [x] Scoop nenainstaluje dobře script pro instalátor *pip*. Nainstaluj ho ručně
+stažením a spuštěním instalčného scriptu v adresáři `shims`.
 
-scoop install luarocks
-luarocks --version
+```powershell
+cd $home\scoop\shims
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+
+pip --version
+pip list
 ```
 
-TODO
+- [x] Nainstaluj *Python* poskytovatele pro neovim.
 
+```powershell
+python -m pip install --user --upgrade pynvim
+
+pip list
+```
+
+Ostatní poskytovatele se díky konfiguraci neboudou kontrolovat.
+
+```lua
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+```
+
+- [ ] Nainstaluj *Ruby* poskytovatele pro neovim, až když bude potřeba.
+
+- [ ] Nainstaluj *Perl* poskytovatele pro neovim, až když bude potřeba.
+
+- [ ] Spusť *neovim* standardně
 
 ```powershel
 nvim-qt
 ```
+
+TODO
