@@ -9,7 +9,7 @@
   * [NVM manažer verzí node.js a npm](#nvm-manažer-verzí-nodejs-a-npm)
   * [Node.js a npm](#nodejs-a-npm)
   * [Nerd fonty](#nerd-fonty)
-  * [CMake, gcc, VC redist, WGet, CURL, 7-Zip](#cmake-gcc-vc-redist-wget-curl-7-zip)
+  * [Make, CMake, gcc, VC redist, WGet, CURL, 7-Zip a cacert](#make-cmake-gcc-vc-redist-wget-curl-7-zip-a-cacert)
   * [Docker](#docker)
   * [Neofetch - systémové informace pro CLI](#neofetch---systémové-informace-pro-cli)
 - [Instalace neovim](#instalace-neovim)
@@ -158,47 +158,24 @@ scoop install JetBrainsMono-NF-Mono
 
 Zavři a znovu otevři konzoli
 
-## CMake, gcc, VC redist, WGet, CURL, 7-Zip
+## Make, CMake, gcc, VC redist, WGet, CURL, 7-Zip a cacert
 
 Některé aplikace, resp. jejich pluginy, nedistribuují buildy pro cílový OS či
-architekturu a v rámci instalačního postup se musí zkompilovat a sestavit ze
+architekturu a v rámci instalačního postupu se musí zkompilovat a sestavit ze
 zdrojových kódů. K tomu je zapotřebí nainstalovat příslušné nástroje, aby byl
 tzv. *build/toolchain* připraven.
 
-- [x] Nainstaluj *CMake*
+- [x] Nainstaluj *toolchain* aplikace
 
 ```powershell
-scoop install cmake
+scoop install make cmake vcredist2022 gcc wget curl 7zip
 ```
 
-- [x] Nainstaluj gcc
+*Cacert* bude nainstalován jako závislost pro *Wget* automaticky. 
+Prověř instalaci výpisem. 
 
 ```powershell
-scoop install gcc
-```
-
-- [x] Nainstaluj VC redist 2022
-
-```powershell
-scoop install vcredist2022
-```
-
-- [x] Nainstaluj WGet
-
-```powershell
-scoop install wget
-```
-
-- [x] Nainstaluj CURL
-
-```powershell
-scoop install curl
-```
-
-- [x] Nainstaluj 7-Zip
-
-```powershell
-scoop install 7zip
+scoop list
 ```
 
 Zavři a znovu otevři konzoli
