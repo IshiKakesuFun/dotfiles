@@ -43,7 +43,12 @@ ICON = {
 
   eol = "﬋", -- 0xfb0b;
 
+  leftbar = "▎", -- 0x258e
+  scrolldown = "", -- 0xf0dd
+  scrollup = "", -- 0xf0de
+  leftdashbar = "┆", -- 0x2506
 }
+
 -- Icon groups
 ICON.LISTCHARS = {
   eol = ICON.eol,
@@ -80,4 +85,12 @@ ICON.SEPARATORS = {
 		right = "", -- 0xe0bb
 	  -- right = '', -- 0xe0b3
 	},
+}
+ICON.GITSIGNS = {
+  add = ICON.leftbar,
+  change = ICON.leftbar,
+  changedelete = ICON.leftbar,
+  delete = ICON.scrolldown .. " ",
+  topdelete = ICON.scrollup .. " ",
+  untracked = ICON.leftdashbar .. " ",
 }

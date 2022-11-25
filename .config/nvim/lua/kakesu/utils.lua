@@ -50,6 +50,17 @@ M.serialize_options = function(tbl)
 	return serialized 
 end
 
+M.concat_path = function(...)
+	local arg = { ... }	
+	local path = ""
+	local divider = ""
+	for _, dir in ipairs(arg) do
+    	path = path .. divider .. dir 
+    	divider = PATH_SEPARATOR
+	end
+	return path
+end
+
 M.set_keymap = function(mode, opts, keymaps)
 	for _, keymap in ipairs(keymaps) do
 		vim.api.nvim_set_keymap(mode, keymap[1], keymap[2], opts)
