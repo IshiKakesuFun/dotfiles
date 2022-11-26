@@ -128,7 +128,7 @@ return packer.startup(function(use)
   ]]
 
   -- configuration of LSP servers
-  -- use("neovim/nvim-lspconfig") -- easily configure language servers
+  use("neovim/nvim-lspconfig") -- easily configure language servers
   --[[
   use("hrsh7th/cmp-nvim-lsp") -- nvim-cmp source for built-in LSP
   use({

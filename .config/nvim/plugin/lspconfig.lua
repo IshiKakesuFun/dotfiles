@@ -44,18 +44,20 @@ end
 -- format on save
 --------------------------------------------------------------------------------
 local augroup_format_on_save = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
-local format_on_save = function(_, bufnr)
-  vim.api.nvim_clear_autocmds({
-    group = augroup_format_on_save,
-    buffer = bufnr,
-  })
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    group = augroup_format_on_save,
-    buffer = bufnr,
-    callback = function()
-      vim.lsp.buf.format({ bufnr = bufnr })
-    end,
-  })
+local format_on_save = function(client, bufnr)
+  if client.server_capabilities.documentFormatingProvider then
+    vim.api.nvim_clear_autocmds({
+      group = augroup_format_on_save,
+      buffer = bufnr,
+    })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup_format_on_save,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ bufnr = bufnr })
+      end,
+    })
+  end
 end
 local enable_format_on_save = {
   "sumneko_lua",
@@ -102,12 +104,12 @@ local on_attach = function(client, bufnr)
   local nOpts = { noremap = true, silent = true }
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   -- go to declaration
-  map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", nOpts) 
+  map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", nOpts)
   -- go to implemetation
-  map("n", "gi", "<cmd>lua vim.lsp.buf.implemetation()<CR>", nOpts) 
+  map("n", "gi", "<cmd>lua vim.lsp.buf.implemetation()<CR>", nOpts)
   -- formating on demand
-  map("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", nOpts) 
-  
+  map("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", nOpts)
+
 --   u.set_buf_keymap(bufnr, "n", { noremap = true, silent = true }, {
 --     { "gf", "<cmd>Lspsaga lsp_finder<CR>" }, -- show definition, references
 --     { "gd", "<cmd>Lspsaga peek_definition<CR>" }, -- see definition and make edits in window
