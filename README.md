@@ -15,6 +15,7 @@
 - [Instalace neovim](#instalace-neovim)
   - [Prerekvizity](#prerekvizity-1)
     - [Symlinky do konfiguračních adresářů](#symlinky-do-konfiguračních-adresářů)
+    - [Nástroje pro vyhledávání fzf, fd, ripgrep](#nástroje-pro-vyhledávání-fzf-fd-ripgrep)
   - [Instalace](#instalace)
   - [Po instalaci](#po-instalaci)
     - [Poskytovatele pro Python, Ruby, NodeJS a Perl](#poskytovatele-pro-python-ruby-nodejs-a-perl)
@@ -230,6 +231,15 @@ if (Test-Path "$lnvim") {
     (Get-Item "$lnvim").Delete();
 }
 New-Item -ItemType SymbolicLink -Path "$lnvim" -Target "$nvim";
+```
+
+### Nástroje pro vyhledávání fzf, fd, ripgrep
+
+- [x] Nainstaluj pomocné nástroje pro vyhledávní souborů a jejich obsahu.
+
+```powershell
+scoop install fd fzf ripgrep
+scoop list
 ```
 
 ## Instalace
