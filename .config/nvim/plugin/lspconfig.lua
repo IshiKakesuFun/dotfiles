@@ -223,26 +223,30 @@ end
 -- })
 
 -- configure lua server (with special settings)
--- lspconfig["sumneko_lua"].setup({
---   capabilities = capabilities,
---   on_attach = on_attach,
---   settings = { -- custom settings for lua
---     Lua = {
---       diagnostics = {
---         -- make the language server recognize "vim" global
---         globals = { "vim" },
---       },
---       workspace = {
---         -- make language server aware of runtime files
---         library = {
---           [VIMRUNTIME_LUA] = true,
---           [CONFIG_LUA] = true,
---         },
---         checkThirdParty = false,
---       },
---     },
---   },
--- })
+lspconfig["sumneko_lua"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = { -- custom settings for lua
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = "LuaJIT",
+      },
+      diagnostics = {
+        -- make the language server recognize "vim" global
+        globals = { "vim" },
+      },
+      workspace = {
+        -- make language server aware of runtime files
+        library = {
+          [VIMRUNTIME_LUA] = true,
+          -- [CONFIG_LUA] = true,
+        },
+        checkThirdParty = false,
+      },
+    },
+  },
+})
 
 -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 --   signs = true,
