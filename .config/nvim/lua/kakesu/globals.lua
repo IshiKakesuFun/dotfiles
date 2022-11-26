@@ -49,7 +49,9 @@ ICON = {
   leftdashbar = "┆", -- 0x2506
 }
 
+--------------------------------------------------------------------------------
 -- Icon groups
+--------------------------------------------------------------------------------
 ICON.LISTCHARS = {
   eol = ICON.eol,
   tab = "", -- 0xea9b,0xeaba,0xea9c; must be 2|3 chars
@@ -71,6 +73,12 @@ ICON.DIAGNOSTICS = {
   warn = ICON.exclamation,
   info = ICON.icircle,
   hint = ICON.bulb,
+}
+ICON.cDIAGNOSTICS = {
+  Error = ICON.bug,
+  Warn = ICON.exclamation,
+  Info = ICON.icircle,
+  Hint = ICON.bulb,
 }
 ICON.SEPARATORS = {
   section = {
