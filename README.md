@@ -19,6 +19,8 @@
   - [Instalace](#instalace)
   - [Po instalaci](#po-instalaci)
     - [Poskytovatele pro Python, Ruby, NodeJS a Perl](#poskytovatele-pro-python-ruby-nodejs-a-perl)
+    - [Tree Sitter CLI](#tree-sitter-cli)
+  - [První spuštění](#první-spuštění)
 
 # Prerekvizity
 
@@ -317,6 +319,18 @@ vim.g.loaded_perl_provider = 0
 - [ ] Nainstaluj *Ruby* poskytovatele pro neovim, až když bude potřeba.
 
 - [ ] Nainstaluj *Perl* poskytovatele pro neovim, až když bude potřeba.
+
+### Tree Sitter CLI
+
+- [x] Některé parsery se pro neovim musí vygerenerovat přímo aplikací
+  [TreeSitter](https://tree-sitter.github.io/tree-sitter).
+
+```powershell
+scoop install tree-sitter
+tree-sitter -V
+```
+
+## První spuštění
 
 - [ ] Spusť *neovim* standardně
 

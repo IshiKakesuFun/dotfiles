@@ -91,6 +91,11 @@ local function format_virtual_text(diagnostic)
   return string.format(" %s [%s][%s] %s", icon, diagnostic.code, diagnostic.source, diagnostic.message)
 end
 
+local lsp_flags = {
+  -- This is the default in Nvim 0.7+
+  debounce_text_changes = 150,
+}
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -104,11 +109,21 @@ local on_attach = function(client, bufnr)
   local nOpts = { noremap = true, silent = true }
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   -- go to declaration
-  map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", nOpts)
+  map("n", "gD", vim.lsp.buf.declaration, nOpts)
+  -- go to definition
+  map("n", "gd", vim.lsp.buf.definition, nOpts)
+  -- show documentation for what is under cursor
+  map("n", "K", vim.lsp.buf.hover, nOpts)
   -- go to implemetation
-  map("n", "gi", "<cmd>lua vim.lsp.buf.implemetation()<CR>", nOpts)
+  map("n", "gi", vim.lsp.buf.implemetation, nOpts)
+  map("n", "<C-k>", vim.lsp.buf.signature_help, nOpts)
   -- formating on demand
-  map("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", nOpts)
+  map("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, nOpts)
+  map("n", "<leader>ca", vim.lsp.buf.code_action, nOpts)
+  map("n", "<leader>rn", vim.lsp.buf.rename, nOpts)
+  map("n", "gr", vim.lsp.buf.references, nOpts)
+  map("n", "[d", vim.diagnostic.goto_prev, nOpts)
+  map("n", "]d", vim.diagnostic.goto_next, nOpts)
 
 --   u.set_buf_keymap(bufnr, "n", { noremap = true, silent = true }, {
 --     { "gf", "<cmd>Lspsaga lsp_finder<CR>" }, -- show definition, references
@@ -192,39 +207,44 @@ end
 --   -- filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
 --   cmd = { "typescript-language-server.cmd", "--stdio" },
 --   capabilities = capabilities,
+--   flags = lsp_flags,
 -- })
 
 -- configure css server
 -- lspconfig["cssls"].setup({
--- 	capabilities = capabilities,
--- 	on_attach = on_attach,
+-- 	 capabilities = capabilities,
+--   flags = lsp_flags,
+-- 	 on_attach = on_attach,
 -- })
 
 -- configure tailwindcss server
 -- lspconfig["tailwindcss"].setup({
--- 	capabilities = capabilities,
--- 	on_attach = on_attach,
+-- 	 capabilities = capabilities,
+--   flags = lsp_flags,
+-- 	 on_attach = on_attach,
 -- })
 
 -- configure emmet language server
 -- lspconfig["emmet_ls"].setup({
--- 	capabilities = capabilities,
--- 	on_attach = on_attach,
--- 	filetypes = {
--- 		"html",
--- 		"typescriptreact",
--- 		"javascriptreact",
--- 		"css",
--- 		"sass",
--- 		"scss",
--- 		"less",
--- 		"svelte",
--- 	},
+-- 	 capabilities = capabilities,
+--   flags = lsp_flags,
+-- 	 on_attach = on_attach,
+-- 	 filetypes = {
+-- 		 "html",
+-- 		 "typescriptreact",
+-- 		 "javascriptreact",
+-- 		 "css",
+-- 		 "sass",
+-- 		 "scss",
+-- 		 "less",
+-- 		 "svelte",
+-- 	 },
 -- })
 
 -- configure lua server (with special settings)
 lspconfig["sumneko_lua"].setup({
   capabilities = capabilities,
+  flags = lsp_flags,
   on_attach = on_attach,
   settings = { -- custom settings for lua
     Lua = {

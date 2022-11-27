@@ -55,7 +55,25 @@ local filename = {
 		newfile = ICON.star,
 	},
 }
-local filenamePath = { "filename", file_status = true, path = 1 }
+local filenamePath = { 
+  "filename", 
+  file_status = true, 
+  path = 1,
+	symbols = {
+		-- Text to show when the file is modified.
+		-- default: "[+]"
+		modified = ICON.floppy,
+		-- Text to show when the file is non-modifiable or readonly.
+		-- default: "[-]"
+		readonly = ICON.lock,
+		-- Text to show for unnamed buffers.
+		-- default: "[No Name]"
+		unnamed = "[no name]",
+		-- Text to show for new created file before first writting
+		-- default: "[New]"
+		newfile = ICON.star,
+	},
+}
 local tabs = {
 	"tabs",
 	-- 0: Shows tab_nr
