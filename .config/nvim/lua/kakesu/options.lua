@@ -58,7 +58,7 @@ o.modelines = 1
 -- search settings
 o.ignorecase = true
 o.smartcase = true
-o.hlsearch = true
+o.hlsearch = false
 o.incsearch = true
 o.inccommand = "split"
 o.iskeyword:append("-") -- "-" is now part of the word, not a divider
