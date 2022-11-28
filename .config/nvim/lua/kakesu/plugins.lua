@@ -37,13 +37,13 @@ status, packer = pcall(require, "packer")
 if not status then
   print("Packer is not installed")
   return
-end-- }}}
+end -- }}}
 
 -- add list of plugins to install
 return packer.startup(function(use)
   -- packer can manage itself
   use("wbthomason/packer.nvim")
-  
+
   use("nvim-lua/plenary.nvim") -- collection of lua functions that many plugins use
   use({
     "nvim-lua/popup.nvim",
@@ -54,8 +54,8 @@ return packer.startup(function(use)
   use("ellisonleao/gruvbox.nvim")
   use("EdenEast/nightfox.nvim")
   use("arcticicestudio/nord-vim")
-  --}}} 
-  
+  --}}}
+
   --{{{ essential plugins
   -- add, delete, change surroundings (it's awesome)
   use("tpope/vim-surround")
@@ -75,7 +75,7 @@ return packer.startup(function(use)
   -- git
   use("tpope/vim-fugitive")
   use("lewis6991/gitsigns.nvim")
-  
+
   -- statusline
   use("nvim-lualine/lualine.nvim")
 
@@ -112,13 +112,14 @@ return packer.startup(function(use)
     },
   })
   use("nvim-telescope/telescope-file-browser.nvim")
-
+  ]]
   -- autocompletion
   use("hrsh7th/nvim-cmp") -- completion plugin
   use("hrsh7th/cmp-buffer") -- nvim-cmp source for text in buffer
   use("hrsh7th/cmp-path") -- source for file system paths
   -- snippets
   use("L3MON4D3/LuaSnip") -- snippet engine
+  --[[
   use("saadparwaiz1/cmp_luasnip") -- for autocompletion
   use("rafamadriz/friendly-snippets") -- useful snippets
 
@@ -129,8 +130,8 @@ return packer.startup(function(use)
 
   -- configuration of LSP servers
   use("neovim/nvim-lspconfig") -- easily configure language servers
-  --[[
   use("hrsh7th/cmp-nvim-lsp") -- nvim-cmp source for built-in LSP
+  --[[
   use({
     "glepnir/lspsaga.nvim",
     branch = "main",
@@ -138,8 +139,9 @@ return packer.startup(function(use)
 
   -- enhanced lsp uis
   use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
-  use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
-
+  ]]
+  use("onsails/lspkind.nvim") -- vs-code like icons or pictograms for autocompletion
+  --[[
   -- formatting & linting
   use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
   use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls

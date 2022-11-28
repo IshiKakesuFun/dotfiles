@@ -301,29 +301,29 @@ lspconfig["sumneko_lua"].setup({
   },
 })
 
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
---   signs = true,
---   underline = true,
---   update_in_insert = true,
---   virtual_text = {
---     spacing = 2,
---     prefix = "•",
---     source = false,
---     severity = {
---       min = vim.diagnostic.severity.HINT,
---     },
---     format = format_virtual_text,
---   },
---   severity_sort = true,
---   float = {
---     focusable = false,
---     header = { signs.Error .. " Diagnostics:", "Normal" },
---     scope = "line",
---     source = false,
---     format = format_virtual_text,
---   },
--- })
---
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+  virtual_text = {
+    spacing = 2,
+    prefix = "•",
+    source = false,
+    severity = {
+      min = vim.diagnostic.severity.HINT,
+    },
+    format = format_virtual_text,
+  },
+  severity_sort = true,
+  float = {
+    focusable = false,
+    header = { signs.Error .. " Diagnostics:", "Normal" },
+    scope = "line",
+    source = false,
+    format = format_virtual_text,
+  },
+})
+
 vim.diagnostic.config({
   virtual_text = {
     prefix = "•",

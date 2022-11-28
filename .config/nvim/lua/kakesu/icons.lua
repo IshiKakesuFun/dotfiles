@@ -3,11 +3,11 @@
 --------------------------------------------------------------------------------
 ICON = {
   branch = "", -- 0xea68
-	ellipsis = "…", -- 0x2026
-	skull = "💀", -- 0x1f480
-  
+  ellipsis = "…", -- 0x2026
+  skull = "💀", -- 0x1f480
+
   floppy = "", -- 0xf692
-	lock = "", -- 0xf023
+  lock = "", -- 0xf023
   star = "", -- 0xea6a
 
   plus_box = "", -- 0xf0fe
@@ -25,12 +25,46 @@ ICON = {
   icircle = "", -- 0xf41b
   bulb = "", -- 0xf400
 
-  eol = "﬋", -- 0xfb0b;
+  eol = "﬋", -- 0xfb0b
+  bol = "﬌", -- 0xfb0c
 
   leftbar = "▎", -- 0x258e
   scrolldown = "", -- 0xf0dd
   scrollup = "", -- 0xf0de
   leftdashbar = "┆", -- 0x2506
+
+  text = "", -- 0xe612
+  textt = "", -- 0xf77e
+  cude = "", -- 0xf6a6
+  func = "", -- 0xf794
+  settings = "", -- 0xf423
+  property = "ﰠ", -- 0xfc20
+  field = "", -- 0xe624
+  alfa = "", -- 0xf52a
+  class = "ﴯ", -- 0xfd2f
+  interface = "", -- 0xf0e8
+  -- interface = "ﰮ", -- 0xfc2e
+  module = "", -- 0xf487
+  unit = "塞", -- 0xf96c
+  -- unit = "", -- 0xf475
+  value = "", -- 0xf89f
+  sort = "", -- 0xf15d
+  key = "", -- 0xf80a
+  types = "", -- 0xf44f
+  list = "", -- 0xf0ca
+  palette = "", -- 0xf8d7
+  file = "", -- 0xf718
+  -- file = "", -- 0xf15b
+  -- reference = "", -- 0xf706
+  reference = "", -- 0xf690
+  folder = "", -- 0xf74a
+  folderopen = "", -- 0xf115
+  pi = "", -- 0xf8fe
+  -- pi = "", -- 0xe22c
+  tree = "פּ", -- 0xfb44
+  event = "", -- 0xf0e7
+  plusminus = "", -- 0xf694
+  lambda = "ﬦ", -- 0xfb26
 }
 
 --------------------------------------------------------------------------------
@@ -66,17 +100,17 @@ ICON.cDIAGNOSTICS = {
 }
 ICON.SEPARATORS = {
   section = {
-  	left = "", -- 0xe0bc
-	  -- left = '', -- 0xe0b0
-	  right = "", -- 0xe0ba
-	  -- right = '', -- 0xe0b2
+    left = "", -- 0xe0bc
+    -- left = '', -- 0xe0b0
+    right = "", -- 0xe0ba
+    -- right = '', -- 0xe0b2
   },
-	component= {
-		left = "", -- 0xe0bd
-	  -- left = '', -- 0xe0b1
-		right = "", -- 0xe0bb
-	  -- right = '', -- 0xe0b3
-	},
+  component = {
+    left = "", -- 0xe0bd
+    -- left = '', -- 0xe0b1
+    right = "", -- 0xe0bb
+    -- right = '', -- 0xe0b3
+  },
 }
 ICON.GITSIGNS = {
   add = ICON.leftbar,
@@ -85,4 +119,31 @@ ICON.GITSIGNS = {
   delete = ICON.scrolldown .. " ",
   topdelete = ICON.scrollup .. " ",
   untracked = ICON.leftdashbar .. " ",
+}
+ICON.CMP = {
+  Text = ICON.text,
+  Method = ICON.cube,
+  Function = ICON.func,
+  Constructor = ICON.settings,
+  Field = ICON.field,
+  Variable = ICON.alfa,
+  Class = ICON.class,
+  Interface = ICON.interface,
+  Module = ICON.module,
+  Property = ICON.property,
+  Unit = ICON.unit,
+  Value = ICON.value,
+  Enum = ICON.list,
+  Keyword = ICON.key,
+  Snippet = ICON.bol,
+  Color = ICON.palette,
+  File = ICON.file,
+  Reference = ICON.reference,
+  Folder = ICON.folder,
+  EnumMember = ICON.sort,
+  Constant = ICON.pi,
+  Struct = ICON.tree,
+  Event = ICON.event,
+  Operator = ICON.lambda,
+  TypeParameter = ICON.types,
 }
