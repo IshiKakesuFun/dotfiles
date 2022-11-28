@@ -1,7 +1,8 @@
 local status,
 lspconfig,
 protocol,
-cmp_nvim_lsp, -- typescript,
+cmp_nvim_lsp,
+-- typescript,
 u
 --------------------------------------------------------------------------------
 -- https://github.com/neovim/nvim-lspconfig
@@ -41,17 +42,17 @@ if not status then
 end
 
 --------------------------------------------------------------------------------
--- format on save
+--{{{ format on save
 --------------------------------------------------------------------------------
-local augroup_format_on_save = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
 local format_on_save = function(client, bufnr)
-  if client.server_capabilities.documentFormatingProvider then
+  if client.server_capabilities.documentFormattingProvider then
+    local group = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
     vim.api.nvim_clear_autocmds({
-      group = augroup_format_on_save,
+      group = group,
       buffer = bufnr,
     })
     vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup_format_on_save,
+      group = group,
       buffer = bufnr,
       callback = function()
         vim.lsp.buf.format({ bufnr = bufnr })
@@ -59,21 +60,27 @@ local format_on_save = function(client, bufnr)
     })
   end
 end
+
 local enable_format_on_save = {
   "sumneko_lua",
   "denols",
   "tsserver",
 }
+--}}}
 
 --------------------------------------------------------------------------------
--- Change the Diagnostic symbols in the sign column (gutter)
+--{{{ Change the Diagnostic symbols in the sign column (gutter)
 --------------------------------------------------------------------------------
 local signs = ICON.cDIAGNOSTICS
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
--- format diagnosti message using same icon like in gutter
+--}}}
+
+--------------------------------------------------------------------------------
+--{{{ format diagnosti message using same icon like in gutter
+--------------------------------------------------------------------------------
 local function format_virtual_text(diagnostic)
   local icon = signs.Info
   if diagnostic.severity == vim.diagnostic.severity.ERROR then
@@ -91,16 +98,15 @@ local function format_virtual_text(diagnostic)
   return string.format(" %s [%s][%s] %s", icon, diagnostic.code, diagnostic.source, diagnostic.message)
 end
 
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
+--}}}
 
+--------------------------------------------------------------------------------
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
+--------------------------------------------------------------------------------
 local on_attach = function(client, bufnr)
   -- formating on save
-   if u.in_array(enable_format_on_save, client.name) then
+  if u.in_array(enable_format_on_save, client.name) then
     format_on_save(client, bufnr)
   end
   local map = function(...)
@@ -108,23 +114,44 @@ local on_attach = function(client, bufnr)
   end
   local nOpts = { noremap = true, silent = true }
   -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local c = client.server_capabilities
+  -- print(vim.inspect(c))
   -- go to declaration
-  map("n", "gD", vim.lsp.buf.declaration, nOpts)
+  if c.declarationProvider then
+    map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", nOpts)
+  end
   -- go to definition
-  map("n", "gd", vim.lsp.buf.definition, nOpts)
+  if c.definitionProvider then
+    map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", nOpts)
+  end
   -- show documentation for what is under cursor
-  map("n", "K", vim.lsp.buf.hover, nOpts)
+  if c.hoverProvider then
+    map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", nOpts)
+  end
+  if c.signatureHelpProvider then
+    map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", nOpts)
+  end
   -- go to implemetation
-  map("n", "gi", vim.lsp.buf.implemetation, nOpts)
-  map("n", "<C-k>", vim.lsp.buf.signature_help, nOpts)
+  if c.implementationProvider then
+    map("n", "gi", "<cmd>lua vim.lsp.buf.implemetation()<cr>", nOpts)
+  end
   -- formating on demand
-  map("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, nOpts)
-  map("n", "<leader>ca", vim.lsp.buf.code_action, nOpts)
-  map("n", "<leader>rn", vim.lsp.buf.rename, nOpts)
-  map("n", "gr", vim.lsp.buf.references, nOpts)
-  map("n", "[d", vim.diagnostic.goto_prev, nOpts)
-  map("n", "]d", vim.diagnostic.goto_next, nOpts)
+  if c.documentFormattingProvider then
+    map("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", nOpts)
+  end
+  if c.codeActionProvider then
+    map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", nOpts)
+  end
+  if c.renameProvider then
+    map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", nOpts)
+  end
+  if c.referncesProvider then
+    map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", nOpts)
+  end
+  map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", nOpts)
+  map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", nOpts)
 
+  --[[{{{
 --   u.set_buf_keymap(bufnr, "n", { noremap = true, silent = true }, {
 --     { "gf", "<cmd>Lspsaga lsp_finder<CR>" }, -- show definition, references
 --     { "gd", "<cmd>Lspsaga peek_definition<CR>" }, -- see definition and make edits in window
@@ -146,6 +173,7 @@ local on_attach = function(client, bufnr)
 --       { "<Leader>ru", "<cmd>TypescriptRemoveUnused<CR>" }, -- remove unused variables (not in youtube nvim video)
 --     })
 --   end
+  }}}]]
 end
 
 -- protocol.CompletionItemKind = {
@@ -180,7 +208,7 @@ end
 -- local capabilities = cmp_nvim_lsp.default_capabilities()
 
 
--- configure html server
+--{{{ configure html server
 -- lspconfig["html"].setup({
 -- 	capabilities = capabilities,
 -- 	on_attach = on_attach,
@@ -239,13 +267,13 @@ end
 -- 		 "less",
 -- 		 "svelte",
 -- 	 },
--- })
+-- })  }}}
 
 -- configure lua server (with special settings)
 lspconfig["sumneko_lua"].setup({
-  capabilities = capabilities,
-  flags = lsp_flags,
+  -- capabilities = capabilities,
   on_attach = on_attach,
+  single_file_support = true,
   settings = { -- custom settings for lua
     Lua = {
       runtime = {
@@ -259,10 +287,15 @@ lspconfig["sumneko_lua"].setup({
       workspace = {
         -- make language server aware of runtime files
         library = {
-          [VIMRUNTIME_LUA] = true,
+          vim.api.nvim_get_runtime_file("", true),
+          -- [VIMRUNTIME_LUA] = true,
           -- [CONFIG_LUA] = true,
         },
         checkThirdParty = false,
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
       },
     },
   },
@@ -291,12 +324,12 @@ lspconfig["sumneko_lua"].setup({
 --   },
 -- })
 --
--- vim.diagnostic.config({
---   virtual_text = {
---     prefix = "•",
---   },
---   update_in_insert = true,
---   float = {
---     source = "always", -- Or "if_many"
---   },
--- })
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = "•",
+  },
+  update_in_insert = true,
+  float = {
+    source = "always", -- Or "if_many"
+  },
+})
