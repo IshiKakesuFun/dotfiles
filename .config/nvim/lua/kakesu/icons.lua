@@ -15,6 +15,7 @@ ICON = {
   minus_box = "", -- 0xf146
   x_box = "", -- 0xf656
   star_box = "", -- 0xf882
+  git = "", -- 0xe702
 
   unix = "", -- 0xe712
   windows = "", -- 0xe70f
@@ -24,14 +25,19 @@ ICON = {
   exclamation = "", -- 0xf421
   icircle = "", -- 0xf41b
   bulb = "", -- 0xf400
+  stethoscope = "律", -- 0xf9d8
 
   eol = "﬋", -- 0xfb0b
   bol = "﬌", -- 0xfb0c
+  jumpto = "", -- 0xf064
 
   leftbar = "▎", -- 0x258e
   scrolldown = "", -- 0xf0dd
   scrollup = "", -- 0xf0de
   leftdashbar = "┆", -- 0x2506
+
+  telescope = "", -- 0xe209
+  magnifier = "", -- 0xf848
 
   text = "", -- 0xe612
   textt = "", -- 0xf77e
@@ -58,7 +64,8 @@ ICON = {
   -- reference = "", -- 0xf706
   reference = "", -- 0xf690
   folder = "", -- 0xf74a
-  folderopen = "", -- 0xf115
+  -- folderopen = "", -- 0xf115
+  folderopen = "", -- 0xe5fe
   pi = "", -- 0xf8fe
   -- pi = "", -- 0xe22c
   tree = "פּ", -- 0xfb44

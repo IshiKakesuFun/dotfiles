@@ -98,7 +98,6 @@ return packer.startup(function(use)
       require("nvim-treesitter.install").update({ with_sync = true })
     end,
   })
-  --[[
   -- Telescope
   use({
     "nvim-telescope/telescope-fzf-native.nvim",
@@ -112,7 +111,7 @@ return packer.startup(function(use)
     },
   })
   use("nvim-telescope/telescope-file-browser.nvim")
-  ]]
+
   -- autocompletion
   use("hrsh7th/nvim-cmp") -- completion plugin
   use("hrsh7th/cmp-buffer") -- nvim-cmp source for text in buffer

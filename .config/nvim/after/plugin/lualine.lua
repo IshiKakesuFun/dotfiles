@@ -128,7 +128,7 @@ lualine.setup({
     "fugitive",
     "fzf",
     -- "nvim-tree",
-    -- "quickfix",
+    "quickfix",
     -- "toggleterm"
   },
   tabline = {

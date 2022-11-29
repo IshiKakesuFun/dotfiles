@@ -1,4 +1,4 @@
-local status, configs, parsers
+local status, configs --, parsers
 --------------------------------------------------------------------------------
 -- https://github.com/nvim-treesitter/nvim-treesitter
 --------------------------------------------------------------------------------
@@ -9,10 +9,10 @@ if not status then
 end
 
 -- import plugin safely
-status, parsers = pcall(require, "nvim-treesitter.parsers")
-if not status then
-  return
-end
+-- status, parsers = pcall(require, "nvim-treesitter.parsers")
+-- if not status then
+--   return
+-- end
 
 configs.setup({
   -- A list of parser names, or "all"
