@@ -33,7 +33,7 @@ configs.setup({
     -- "json",
     "lua",
     -- "mermaid",
-    -- "markdown",
+    "markdown",
     -- "prisma",
     -- "python",
     -- "regex",

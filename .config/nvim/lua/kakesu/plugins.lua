@@ -9,10 +9,10 @@ if not status then
   return
 end -- }}}
 
-local packerUrl = "https://github.com/wbthomason/packer.nvim" -- {{{
+--{{{ auto install packer if not installed
+local packerUrl = "https://github.com/wbthomason/packer.nvim"
 local install_path = u.concat_path(DATA_PATH, "site", "pack", "packer", "start", "packer.nvim")
 
--- auto install packer if not installed
 local ensure_packer = function()
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system({ "git", "clone", "--depth", "1", packerUrl, install_path })
@@ -150,14 +150,19 @@ return packer.startup(function(use)
   use("norcalli/nvim-colorizer.lua")
   use("windwp/nvim-autopairs")
   use("windwp/nvim-ts-autotag")
-  --[[
+
   use({
     "iamcco/markdown-preview.nvim",
     run = function()
       vim.fn["mkdp#util#install"]()
     end,
   })
-  ]]
+
+  use({
+    "akinsho/toggleterm.nvim",
+    tag = '*',
+  })
+
 
   if packer_bootstrap then
     require("packer").sync()
