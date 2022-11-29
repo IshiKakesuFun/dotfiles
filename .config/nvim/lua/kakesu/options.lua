@@ -33,8 +33,8 @@ o.swapfile = false -- [set noswapfile] This is recommended by undotree
 --   1. :center, :left, :right
 --   2. gw{motion} - Put cursor back after formatting motion.
 
-o.formatoptions = o.formatoptions - {"o"} -- O and o, don't continue comments
-o.formatoptions:append({"r"}) -- Add asterisks in block comments 
+o.formatoptions = o.formatoptions - { "o" } -- O and o, don't continue comments
+o.formatoptions:append({ "r" }) -- Add asterisks in block comments
 
 -- tabs & indentation
 o.tabstop = 2
@@ -71,14 +71,14 @@ o.wildignore:append { "*/node_modules/*" }
 o.cursorline = true -- Highlight the current line
 local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
 local set_cursorline = function(event, value, pattern)
-	vim.api.nvim_create_autocmd(event, {
-		group = group,
-		pattern = pattern,
-		callback = function()
-			vim.opt_local.cursorline = value
-			vim.opt_local.colorcolumn = value and "80,120" or ""
-		end,
-	})
+  vim.api.nvim_create_autocmd(event, {
+    group = group,
+    pattern = pattern,
+    callback = function()
+      vim.opt_local.cursorline = value
+      vim.opt_local.colorcolumn = value and "80,120" or ""
+    end,
+  })
 end
 set_cursorline("WinLeave", false)
 set_cursorline("WinEnter", true)
@@ -93,7 +93,7 @@ o.signcolumn = "yes"
 o.list = true
 local status, u = pcall(require, "kakesu.utils")
 if status then
-	o.listchars = u.serialize_options(ICON.LISTCHARS)
+  o.listchars = u.serialize_options(ICON.LISTCHARS)
 end
 o.winblend = 0
 o.wildoptions = "pum"
@@ -103,14 +103,14 @@ o.laststatus = 2
 o.cmdheight = 1 -- [set cmdheight=3] More space for displaying messages
 o.scrolloff = 10 -- Make it so there are always ten lines below my cursor
 o.sidescrolloff = 5
-o.guifont = "JetBrainsMonoNL NFM:h12"
+o.guifont = "JetBrainsMonoNL NFM:h11"
 o.showcmd = true
 
 -- clipboard
 if IS_WIN then
-	o.clipboard:prepend({ "unnamed", "unnamedplus" }) 
+  o.clipboard:prepend({ "unnamed", "unnamedplus" })
 elseif IS_UNIX then
-	o.clipboard:append({ "unnamedplus" }) 
+  o.clipboard:append({ "unnamedplus" })
 end
 
 -- split windows

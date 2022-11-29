@@ -90,7 +90,7 @@ return packer.startup(function(use)
       "kyazdani42/nvim-web-devicons",
     },
   })
-
+  ]]
   -- treesitter configuration
   use({
     "nvim-treesitter/nvim-treesitter",
@@ -98,7 +98,7 @@ return packer.startup(function(use)
       require("nvim-treesitter.install").update({ with_sync = true })
     end,
   })
-
+  --[[
   -- Telescope
   use({
     "nvim-telescope/telescope-fzf-native.nvim",
@@ -119,8 +119,8 @@ return packer.startup(function(use)
   use("hrsh7th/cmp-path") -- source for file system paths
   -- snippets
   use("L3MON4D3/LuaSnip") -- snippet engine
-  --[[
   use("saadparwaiz1/cmp_luasnip") -- for autocompletion
+  --[[
   use("rafamadriz/friendly-snippets") -- useful snippets
 
   -- managing and installing LSP servers, linters and formaters

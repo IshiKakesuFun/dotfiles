@@ -16,10 +16,10 @@ end
 -- https://github.com/hrsh7th/cmp-nvim-lsp
 --------------------------------------------------------------------------------
 -- import plugin safely
--- status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
--- if not status then
---   return
--- end
+status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status then
+  return
+end
 --------------------------------------------------------------------------------
 -- https://github.com/jose-elias-alvarez/typescript.nvim
 --------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ end
 --}}}
 
 --------------------------------------------------------------------------------
--- Use an on_attach function to only map the following keys
+--{{{ Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 --------------------------------------------------------------------------------
 local on_attach = function(client, bufnr)
@@ -150,31 +150,32 @@ local on_attach = function(client, bufnr)
   end
   map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", nOpts)
   map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", nOpts)
+  --{{{
+  --[[
+  u.set_buf_keymap(bufnr, "n", { noremap = true, silent = true }, {
+    { "gf", "<cmd>Lspsaga lsp_finder<CR>" }, -- show definition, references
+    { "gd", "<cmd>Lspsaga peek_definition<CR>" }, -- see definition and make edits in window
+    { "<Leader>ca", "<cmd>Lspsaga code_action<CR>" }, -- see available code actions
+    { "<Leader>rn", "<cmd>Lspsaga rename<CR>" }, -- smart rename
+    { "<Leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>" }, -- show diagnostics for line
+    { "<Leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>" }, -- show diagnostics for cursor
+    { "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>" }, -- jump to previous diagnostic in buffer
+    { "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>" }, -- jump to next diagnostic in buffer
+    { "K", "<cmd>Lspsaga hover_doc<CR>" }, -- show documentation for what is under cursor
+    { "<Leader>o", "<cmd>LSoutlineToggle<CR>" }, -- toggle outline on the right hand
+  })
 
-  --[[{{{
---   u.set_buf_keymap(bufnr, "n", { noremap = true, silent = true }, {
---     { "gf", "<cmd>Lspsaga lsp_finder<CR>" }, -- show definition, references
---     { "gd", "<cmd>Lspsaga peek_definition<CR>" }, -- see definition and make edits in window
---     { "<Leader>ca", "<cmd>Lspsaga code_action<CR>" }, -- see available code actions
---     { "<Leader>rn", "<cmd>Lspsaga rename<CR>" }, -- smart rename
---     { "<Leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>" }, -- show diagnostics for line
---     { "<Leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>" }, -- show diagnostics for cursor
---     { "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>" }, -- jump to previous diagnostic in buffer
---     { "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>" }, -- jump to next diagnostic in buffer
---     { "K", "<cmd>Lspsaga hover_doc<CR>" }, -- show documentation for what is under cursor
---     { "<Leader>o", "<cmd>LSoutlineToggle<CR>" }, -- toggle outline on the right hand
---   })
---
---   if false and client.name == "tsserver" then
---     -- normal
---     u.set_buf_keymap(bufnr, "n", { noremap = true, silent = true }, {
---       { "<Leader>rf", "<cmd>TypescriptRenameFile<CR>" }, -- rename file and update imports
---       { "<Leader>oi", "<cmd>TypescriptOrganizeImports<CR>" }, -- organize imports (not in youtube nvim video)
---       { "<Leader>ru", "<cmd>TypescriptRemoveUnused<CR>" }, -- remove unused variables (not in youtube nvim video)
---     })
---   end
-  }}}]]
+  if false and client.name == "tsserver" then
+    -- normal
+    u.set_buf_keymap(bufnr, "n", { noremap = true, silent = true }, {
+      { "<Leader>rf", "<cmd>TypescriptRenameFile<CR>" }, -- rename file and update imports
+      { "<Leader>oi", "<cmd>TypescriptOrganizeImports<CR>" }, -- organize imports (not in youtube nvim video)
+      { "<Leader>ru", "<cmd>TypescriptRemoveUnused<CR>" }, -- remove unused variables (not in youtube nvim video)
+    })
+  end
+  ]] --}}}
 end
+--}}}
 
 -- protocol.CompletionItemKind = {
 --   "", -- Text
@@ -205,10 +206,12 @@ end
 -- }
 
 -- used to enable autocompletion (assign to every lsp server config)
--- local capabilities = cmp_nvim_lsp.default_capabilities()
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
-
---{{{ configure html server
+--------------------------------------------------------------------------------
+--{{{ Configure LSP servers
+--------------------------------------------------------------------------------
+-- -- configure html server
 -- lspconfig["html"].setup({
 -- 	capabilities = capabilities,
 -- 	on_attach = on_attach,
@@ -267,11 +270,12 @@ end
 -- 		 "less",
 -- 		 "svelte",
 -- 	 },
--- })  }}}
+-- })
+--}}}
 
 -- configure lua server (with special settings)
 lspconfig["sumneko_lua"].setup({
-  -- capabilities = capabilities,
+  capabilities = capabilities,
   on_attach = on_attach,
   single_file_support = true,
   settings = { -- custom settings for lua
@@ -283,6 +287,7 @@ lspconfig["sumneko_lua"].setup({
       diagnostics = {
         -- make the language server recognize "vim" global
         globals = { "vim" },
+        disable = { "undefined-global" } -- TODO: check behavior after null-ls install
       },
       workspace = {
         -- make language server aware of runtime files
