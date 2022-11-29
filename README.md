@@ -322,8 +322,9 @@ vim.g.loaded_perl_provider = 0
 
 ### Tree Sitter CLI
 
-- [x] Některé parsery se pro neovim musí vygerenerovat přímo aplikací
-  [TreeSitter](https://tree-sitter.github.io/tree-sitter).
+- [x] Pro instalaci parserů za běhu při ovtevření daného typu souboru
+  musíš mít lokálně nainstalovnou aplikaci 
+  [TreeSitter](https://tree-sitter.github.io/tree-sitter) CLI.
 
 ```powershell
 scoop install tree-sitter

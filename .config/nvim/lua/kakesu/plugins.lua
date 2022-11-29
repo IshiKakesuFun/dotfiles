@@ -150,8 +150,8 @@ return packer.startup(function(use)
   use("folke/zen-mode.nvim")
   use("norcalli/nvim-colorizer.lua")
   use("windwp/nvim-autopairs")
-  --[[
   use("windwp/nvim-ts-autotag")
+  --[[
   use({
     "iamcco/markdown-preview.nvim",
     run = function()
