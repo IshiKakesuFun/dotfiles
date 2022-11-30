@@ -9,7 +9,7 @@ end
 
 -- get lualine theme
 if not DEFAULT_COLOR_THEME then
-  DEFAULT_COLOR_THEME = "gruvbox"
+  DEFAULT_COLOR_THEME = "nightfox"
   vim.cmd("colorscheme " .. DEFAULT_COLOR_THEME)
 end
 local lualine_theme = require("lualine.themes." .. vim.g.colors_name)
@@ -89,6 +89,9 @@ local windows = {
   -- 1: Shows window index
   -- 2: Shows window name + window index
   mode = 2,
+  symbols = {
+    modified = " " .. ICON.floppy,
+  },
 }
 
 local filetype = { "filetype", icon_only = false }
@@ -129,7 +132,7 @@ lualine.setup({
     "fzf",
     -- "nvim-tree",
     "quickfix",
-    -- "toggleterm"
+    "toggleterm"
   },
   tabline = {
     lualine_a = {},

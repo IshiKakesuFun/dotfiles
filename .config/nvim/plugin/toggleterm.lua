@@ -34,7 +34,7 @@ local lazygit = Terminal:new({
   direction = "float",
   dir = "git_dir",
   float_opts = {
-    border = "double",
+    border = "curved",
   },
   -- function to run on opening the terminal
   on_open = function(term)

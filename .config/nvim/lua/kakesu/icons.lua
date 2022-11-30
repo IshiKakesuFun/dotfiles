@@ -5,6 +5,7 @@ ICON = {
   branch = "", -- 0xea68
   ellipsis = "…", -- 0x2026
   skull = "💀", -- 0x1f480
+  shell = "", -- 0xe795
 
   floppy = "", -- 0xf692
   lock = "", -- 0xf023

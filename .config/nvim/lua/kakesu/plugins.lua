@@ -75,19 +75,26 @@ return packer.startup(function(use)
   -- git
   use("tpope/vim-fugitive")
   use("lewis6991/gitsigns.nvim")
+  --
+  -- vs-code like icons
+  use("nvim-tree/nvim-web-devicons")
 
   -- statusline
   use("nvim-lualine/lualine.nvim")
 
-  -- vs-code like icons
-  use("kyazdani42/nvim-web-devicons")
+  -- buffer/tab line
+  -- use({
+  --   "akinsho/bufferline.nvim",
+  --   tag = "v3.*",
+  --   requires = "nvim-tree/nvim-web-devicons",
+  -- })
 
   --[[
   -- File/project explorer
   use({
-    "kyazdani42/nvim-tree.lua",
+    "nvim-tree/nvim-tree.lua",
     requires = {
-      "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
     },
   })
   ]]

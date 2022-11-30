@@ -27,6 +27,12 @@ km("c", "Q<CR>", "q<CR>", cOpts)
 km("n", " ", "", nOpts)
 km("n", "\\", "", nOpts)
 
+-- diff
+km("n", "\\ds", "<cmd>diffsplit<CR><C-w>j", nOpts) -- split window horizontally for diff and move to new
+km("n", "\\dv", "<cmd>vert diffsplit<CR><C-w>l", nOpts) -- split window vertically for diff and move to new
+km("n", "\\dt", "<cmd>diffthis<CR>", nOpts) -- start diff in current window
+km("n", "\\dq", "<cmd>diffoff<CR>", nOpts) -- ends diff in current window
+
 -- window management
 km("n", "sv", "<cmd>vsplit<CR><C-w>l", nOpts) -- split window vertically, move to new
 km("n", "ss", "<cmd>split<CR><C-w>j", nOpts) -- split window horizontally, move to new
@@ -64,9 +70,9 @@ km("n", "^", "0", nOpts)
 
 -- old windows habbits
 km("n", "<C-a>", "ggVG", nOpts) -- select all
-km("n", "<C-s>", "<cmd>w<CR>", nOpts) -- save changes 
-km("v", "<C-s>", "<cmd>w<CR>", vOpts) -- save changes 
-km("i", "<C-s>", "<cmd>w<CR>", iOpts) -- save changes 
+km("n", "<C-s>", "<cmd>w<CR>", nOpts) -- save changes
+km("v", "<C-s>", "<cmd>w<CR>", vOpts) -- save changes
+km("i", "<C-s>", "<cmd>w<CR>", iOpts) -- save changes
 
 -- capy all messages to clipboard
 km("n", "<leader>cm", "<cmd>let @*=execute('messages')<cr>", nOpts)
