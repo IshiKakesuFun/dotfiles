@@ -122,14 +122,17 @@ local on_attach = function(client, bufnr)
   end
   -- go to definition
   if c.definitionProvider then
-    map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", nOpts)
+    -- map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", nOpts)
+    map("n", "gd", "<cmd>Lspsaga peek_definition<cr>", nOpts)
+    map("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", nOpts) -- show definition, references
   end
   -- show documentation for what is under cursor
   if c.hoverProvider then
-    map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", nOpts)
+    -- map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", nOpts)
+    map("n", "K", "<cmd>Lspsaga hover_doc<CR>", nOpts) -- show documentation for what is under cursor
   end
   if c.signatureHelpProvider then
-    map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", nOpts)
+    map("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", nOpts)
   end
   -- go to implemetation
   if c.implementationProvider then
@@ -140,31 +143,27 @@ local on_attach = function(client, bufnr)
     map("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", nOpts)
   end
   if c.codeActionProvider then
-    map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", nOpts)
+    -- map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", nOpts)
+    map("n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", nOpts)
   end
   if c.renameProvider then
-    map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", nOpts)
+    -- map("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", nOpts)
+    map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", nOpts) -- smart rename
   end
-  if c.referncesProvider then
-    map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", nOpts)
+  if c.referencesProvider then
+    -- map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", nOpts)
+    map("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", nOpts) -- show definition, references
   end
-  map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", nOpts)
-  map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", nOpts)
+  -- map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", nOpts)
+  -- map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", nOpts)
+  map("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", nOpts) -- jump to previous diagnostic in buffer
+  map("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", nOpts) -- jump to next diagnostic in buffer
+  map("n", "<Leader>o", "<cmd>LSoutlineToggle<CR>", nOpts) -- toggle outline on the right hand
+  map("n", "<Leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>", nOpts) -- show diagnostics for line
+  map("n", "<Leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", nOpts) -- show diagnostics for cursor
+
   --{{{
   --[[
-  u.set_buf_keymap(bufnr, "n", { noremap = true, silent = true }, {
-    { "gf", "<cmd>Lspsaga lsp_finder<CR>" }, -- show definition, references
-    { "gd", "<cmd>Lspsaga peek_definition<CR>" }, -- see definition and make edits in window
-    { "<Leader>ca", "<cmd>Lspsaga code_action<CR>" }, -- see available code actions
-    { "<Leader>rn", "<cmd>Lspsaga rename<CR>" }, -- smart rename
-    { "<Leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>" }, -- show diagnostics for line
-    { "<Leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>" }, -- show diagnostics for cursor
-    { "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>" }, -- jump to previous diagnostic in buffer
-    { "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>" }, -- jump to next diagnostic in buffer
-    { "K", "<cmd>Lspsaga hover_doc<CR>" }, -- show documentation for what is under cursor
-    { "<Leader>o", "<cmd>LSoutlineToggle<CR>" }, -- toggle outline on the right hand
-  })
-
   if false and client.name == "tsserver" then
     -- normal
     u.set_buf_keymap(bufnr, "n", { noremap = true, silent = true }, {

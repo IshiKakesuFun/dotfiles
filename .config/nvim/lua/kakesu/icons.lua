@@ -27,6 +27,14 @@ ICON = {
   icircle = "", -- 0xf41b
   bulb = "", -- 0xf400
   stethoscope = "律", -- 0xf9d8
+  
+  xCircle = "", -- 0xf057
+  exclamationCircle = "", -- 0xf06a
+  iCircle = "", -- 0xf05a
+  eventCircle = "ﴞ", -- 0xfd1e
+  sendCircle = "", -- 0xe215
+  refCircle = "諭", -- 0xfabe
+  link = "", -- 0xf838
 
   eol = "﬋", -- 0xfb0b
   bol = "﬌", -- 0xfb0c
@@ -105,6 +113,17 @@ ICON.cDIAGNOSTICS = {
   Warn = ICON.exclamation,
   Info = ICON.icircle,
   Hint = ICON.bulb,
+}
+ICON.sagaDIAGNOSTICS = {
+  ICON.bug .. " ",
+  ICON.exclamation .. " ",
+  ICON.icircle .. " ",
+  ICON.bulb .. " ",
+}
+ICON.sagaFINDER = {
+  def = ICON.sendCircle .. "  ",
+  ref = ICON.reference .. "  ",
+  link = ICON.link .. "  ",
 }
 ICON.SEPARATORS = {
   section = {

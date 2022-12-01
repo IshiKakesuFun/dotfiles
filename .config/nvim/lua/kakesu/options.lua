@@ -103,7 +103,7 @@ o.laststatus = 2
 o.cmdheight = 1 -- [set cmdheight=3] More space for displaying messages
 o.scrolloff = 10 -- Make it so there are always ten lines below my cursor
 o.sidescrolloff = 5
-o.guifont = "JetBrainsMonoNL NFM:h11"
+o.guifont = "JetBrainsMonoNL NFM:h12"
 o.showcmd = true
 
 -- clipboard
