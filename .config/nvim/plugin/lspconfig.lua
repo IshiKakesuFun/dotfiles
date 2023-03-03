@@ -273,7 +273,7 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 --}}}
 
 -- configure lua server (with special settings)
-lspconfig["sumneko_lua"].setup({
+lspconfig["lua_ls"].setup({
   capabilities = capabilities,
   on_attach = on_attach,
   single_file_support = true,

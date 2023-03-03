@@ -27,7 +27,7 @@ ICON = {
   icircle = "", -- 0xf41b
   bulb = "", -- 0xf400
   stethoscope = "律", -- 0xf9d8
-  
+
   xCircle = "", -- 0xf057
   exclamationCircle = "", -- 0xf06a
   iCircle = "", -- 0xf05a
