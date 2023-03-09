@@ -25,7 +25,9 @@ for option, value in pairs(powershell_options) do
   vim.opt[option] = value
 end
 
-toggleterm.setup()
+toggleterm.setup({
+  autochdir = true,
+})
 
 local Terminal = terminal.Terminal
 local lazygit = Terminal:new({
